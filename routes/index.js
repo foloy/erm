@@ -3,9 +3,13 @@
  */
 module.exports=function(app){
     app.get('/', function (req, res) {
-        res.render('index',{title:'index' })
+        res.render('index')
     })
     app.get('/new',function(req,res){
-        res.render('index',{title:'new'})
+        res.render('index')
+    })
+    app.get('/test',function(req,res){
+
+        res.render('index');
     })
 }
