@@ -47,7 +47,7 @@ User.prototype.save = function(callback){
 
 
 //读取用户信息
-User.get =function(name,callback){
+User.get =function(code,callback){
     //打开数据库
     mongodb.open(function(err,db){
         if(err){
