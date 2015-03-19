@@ -5,11 +5,11 @@ var crypto = require('crypto'),
     User =require('../models/user.js');
 
 module.exports=function(app){
+
+    app.get('/home',checkLogin);
     app.get('/home',function(req,res){
-        res.render('index',{
-            user:req.session.user,
-            success:req.flash('success').toString(),
-            error:req.flash('error').toString()
+        res.render('',{
+            user:req.session.user
         });
     });
 
@@ -22,7 +22,7 @@ module.exports=function(app){
         res.render('login');
     });
 
-    /*app.post('/login',checkNotLogin);*/
+    //app.post('/login',checkNotLogin);
     app.post('/login', function (req, res) {
         var md5=crypto.createHash('md5'),
             password = md5.update(req.body.password).digest('hex');
@@ -63,21 +63,25 @@ module.exports=function(app){
         });
     });
 
-    app.get('logout',checkLogin);
+    app.get('/logout',checkLogin);
     app.get('/logout',function(req,res){
-        req.session.user =null;
+        req.session.user = null;
         req.flash('success','登出成功!');
         res.redirect('/login');
     });
 
-    app.get('/test',function(req,res){
-        res.render('index');
+    app.get('/',checkNotLogin);
+    app.get('/',function(req,res){
+        res.render('login',{
+            success:req.flash('success').toString(),
+            error:req.flash('error').toString()
+        });
     });
 
     function checkNotLogin(req,res,next){
         if(req.session.user){
             req.flash('error','已登录!');
-            res.redirect('back');
+            res.redirect('/home');
         }
         next();
     }
@@ -85,8 +89,20 @@ module.exports=function(app){
     function checkLogin(req,res,next){
         if(!req.session.user){
             req.flash('error','未登录!');
-            res.redirect('/login');
+            return res.redirect('/login');
         }
         next();
     }
+
+    function checkRight(req,res,next){
+        if(req.session.user.right==0){
+            req.flash('error','用户权限不足!');
+            res.redirect('/home');
+        }
+        next();
+    }
+
+    app.post('/equ',function(req,res){
+
+    })
 };
