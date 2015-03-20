@@ -46,20 +46,31 @@ module.exports=function(app){
 
     app.post('/reg',function(req,res){
         var code = req.body.code,
-            name =req.body.name;
+            name =req.body.name,
+            dept =req.body.dept,
+            kind =req.body.kind,
+            position =req.body.position,
+            gender =req.body.gender,
+            right=req.body.right,
+            password='123456';
         //生成md5值
         var md5 = crypto.createHash('md5'),
-            password =md5.update(req.body.password).digest('hex');
+            password =md5.update(password).digest('hex');
         var newUser = new User({
             name:req.body.name,
             password:password,
-            code:req.body.code
+            code:req.body.code,
+            dept:req.body.dept,
+            kind:req.body.kind,
+            position:req.body.position,
+            gender:req.body.gender,
+            right:req.body.right
         });
         //增加用户
         newUser.save(function(err,user){
-            req.session.user =user;
+            //req.session.user =user;
             req.flash('success');
-            res.redirect('/login');
+            res.redirect('/user');
         });
     });
 
@@ -102,7 +113,32 @@ module.exports=function(app){
         next();
     }
 
-    app.post('/equ',function(req,res){
+    app.get('/equipment',checkLogin);
+    app.get('/equipment',function(req,res){
+        res.render('equipment',{
+            user:req.session.user
+        });
+    });
 
+    app.get('/user',checkLogin);
+    app.get('/user',function(req,res){
+        User.list(req.body.name,function(err,users){
+            if(err){
+                users=[];
+            }
+            res.render('user',{
+                user:req.session.user,
+                users:users
+            });
+        })
+    })
+
+    app.get('/user/delete',function(req,res){
+        User.delete(req.body.code,function(err){
+            res.render('user',{
+                user:req.session.user,
+                users:users
+            });
+        })
     })
 };

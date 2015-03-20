@@ -1,0 +1,53 @@
+<% include header.ejs%>
+<div>
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+            <legend>设备管理</legend>
+            <div class="row">
+                <div class="col-md-9">
+                    <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myModal">
+                        <i class="fa fa-plus"></i>新增
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">新增设备</h4>
+                                </div>
+                                <div class="modal-body">
+                                    ...
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    <button type="button" class="btn btn-sm">保存</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control input-sm" ng-model="queryText" placeholder="请输入名称"/>
+                        <span class="input-group-btn">
+                            <button class="btn btn-sm" type="button">
+                                <span class="fa fa-search" tooltip="查询"></span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-bordered">
+                        ...
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+</div>
+<%= include footer.ejs%>
