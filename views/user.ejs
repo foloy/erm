@@ -23,7 +23,7 @@
                                             <div class="col-sm-6">
                                                 <label class="col-sm-3 control-label">编号</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" class="form-control input-sm" name="code" placeholder="必填">
+                                                    <input type="text" class="form-control input-sm" name="code" placeholder="必填" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -31,13 +31,13 @@
                                             <div class="col-sm-6">
                                                 <label class="col-sm-3 control-label">姓名</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" class="form-control input-sm" name="name" placeholder="必填">
+                                                    <input type="text" class="form-control input-sm" name="name" placeholder="必填" required>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <label class="col-sm-3 control-label">部门</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" class="form-control input-sm" name="dept" placeholder="必填">
+                                                    <input type="text" class="form-control input-sm" name="dept" placeholder="必填" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -45,13 +45,13 @@
                                             <div class="col-sm-6">
                                                 <label class="col-sm-3 control-label">性别</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" class="form-control input-sm" name="gender" placeholder="必填">
+                                                    <input type="text" class="form-control input-sm" name="gender" placeholder="必填" required>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <label class="col-sm-3 control-label">职务</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" class="form-control input-sm" name="position" placeholder="必填">
+                                                    <input type="text" class="form-control input-sm" name="position" placeholder="必填" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -59,13 +59,13 @@
                                             <div class="col-sm-6">
                                                 <label class="col-sm-3 control-label">工种</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" class="form-control input-sm" name="kind" placeholder="必填">
+                                                    <input type="text" class="form-control input-sm" name="kind" placeholder="必填" required>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <label class="col-sm-3 control-label">权限值</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" class="form-control input-sm" name="right" placeholder="必填">
+                                                    <input type="text" class="form-control input-sm" name="right" placeholder="必填" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -110,11 +110,11 @@
                             <td style="text-align: center"><%= index+1%></td>
                             <td style="text-align: center"><a href="#"><%= user.name %></a></td>
                             <td style="text-align: center"><%= user.code %></td>
-                            <td style="text-align: center"><%= user.code %></td>
-                            <td style="text-align: center"><%= user.code %></td>
-                            <td style="text-align: center"><%= user.code %></td>
-                            <td style="text-align: center"><%= user.code %></td>
-                            <td style="text-align: center"><%= user.code %></td>
+                            <td style="text-align: center"><%= user.dept %></td>
+                            <td style="text-align: center"><%= user.gender %></td>
+                            <td style="text-align: center"><%= user.position %></td>
+                            <td style="text-align: center"><%= user.kind %></td>
+                            <td style="text-align: center"><%= user.right %></td>
                             <td style="text-align: center">
                                 <a href="" tooltip="授权"><i class="fa fa-lock"></i></a>
                                 <a href="" tooltip="重置密码"><i class="fa fa-reply"></i></a>

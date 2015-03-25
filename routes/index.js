@@ -121,6 +121,7 @@ module.exports=function(app){
     });
 
     app.get('/user',checkLogin);
+    app.get('/user',checkRight);
     app.get('/user',function(req,res){
         User.list(req.body.name,function(err,users){
             if(err){
@@ -134,8 +135,8 @@ module.exports=function(app){
     })
 
     app.get('/user/delete',function(req,res){
-        User.delete(req.body.code,function(err){
-            res.render('user',{
+        User.delete(req.query.code,function(err){
+            res.redirect('/user',{
                 user:req.session.user,
                 users:users
             });
