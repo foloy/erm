@@ -35,7 +35,7 @@ Equipment.prototype.save =function(callback){
         if(err){
             return callback(err);
         }
-        //读取user集合
+        //读取equipment集合
         db.collection('equipments',function(err,collection){
             if(err){
                 mongodb.close();

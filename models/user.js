@@ -133,4 +133,41 @@ User.delete =function(code,callback){
             });
         });
     });
+};
+
+User.edit =function(code,callback){
+    //数据文档
+    var user ={
+        name:this.name,
+        password:this.password,
+        code:this.code,
+        dept:this.dept,
+        kind:this.kind,
+        position:this.dept,
+        gender:this.gender,
+        right:this.right
+    };
+    mongodb.open(function(err,db){
+        if(err){
+            return callback(err);
+        }
+        db.collection('users',function(err,collection){
+            if(err){
+                mongodb.close();
+                return callback(err);
+            }
+            collection.update(
+                {code:code},
+                {$set:user},
+                false,
+                false
+            ),function(err,user){
+                mongodb.close();
+                if(err){
+                    return callback(err);
+                }
+                callback(null,user[0]);
+            }
+        })
+    })
 }
