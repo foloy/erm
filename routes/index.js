@@ -8,7 +8,7 @@ module.exports=function(app){
 
     app.get('/home',checkLogin);
     app.get('/home',function(req,res){
-        res.render('home',{
+        res.render('index',{
             user:req.session.user
         });
     });
@@ -132,13 +132,19 @@ module.exports=function(app){
                 users:users
             });
         })
-    })
+    });
 
+    app.get('/personal',checkLogin);
+    app.get('/personal',function(req,res){
+        res.render('personal',{
+            user:req.session.user
+        });
+    });
+
+    app.get('/user',checkRight);
     app.get('/user/delete',function(req,res){
         User.delete(req.query.code,function(err){
-            res.render('/user',{
-                user:req.session.user
-            });
+            res.redirect('/user');
         })
     })
 };
