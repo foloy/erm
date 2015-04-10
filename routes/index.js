@@ -8,7 +8,7 @@ module.exports=function(app){
 
     app.get('/home',checkLogin);
     app.get('/home',function(req,res){
-        res.render('',{
+        res.render('home',{
             user:req.session.user
         });
     });
@@ -136,9 +136,8 @@ module.exports=function(app){
 
     app.get('/user/delete',function(req,res){
         User.delete(req.query.code,function(err){
-            res.redirect('/user',{
-                user:req.session.user,
-                users:users
+            res.render('/user',{
+                user:req.session.user
             });
         })
     })

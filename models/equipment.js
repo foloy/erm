@@ -17,40 +17,40 @@ function Equipment(equipment){
 module.exports =Equipment;
 
 //存储信息
-Equipment.prototype.save =function(callback){
+Equipment.prototype.save =function(callback) {
     //数据文档
-    var equipment ={
-        code :this.code,
-        name :this.name,
-        model :this.model,
-        manufacture :this.manufacture,
-        startDate :this.startDate,
-        validity :this.validity,
-        dept :this.dept,
-        user :this.user
+    var equipment = {
+        code: this.code,
+        name: this.name,
+        model: this.model,
+        manufacture: this.manufacture,
+        startDate: this.startDate,
+        validity: this.validity,
+        dept: this.dept,
+        user: this.user
     };
 
     //打开数据库
-    mongodb.open(function(err,db){
-        if(err){
+    mongodb.open(function (err, db) {
+        if (err) {
             return callback(err);
         }
         //读取equipment集合
-        db.collection('equipments',function(err,collection){
-            if(err){
+        db.collection('equipments', function (err, collection) {
+            if (err) {
                 mongodb.close();
                 return callback(err);
             }
             //插入数据
-            collection.insert(equipment,{
-                safe:true
-            },function(err,equipment){
+            collection.insert(equipment, {
+                safe: true
+            }, function (err, equipment) {
                 mongodb.close();
-                if(err){
+                if (err) {
                     return callback(err);
                 }
-                callback(null,equipment[0]);
+                callback(null, equipment[0]);
             });
         });
     });
-}
+};
