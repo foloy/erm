@@ -186,4 +186,14 @@ module.exports=function(app){
     });
 
 
+
+    //设备故障模块
+    app.get('/hitch',checkLogin);
+    app.get('/hitch',function(req,res){
+        res.render('hitch',{
+            user:req.session.user
+        });
+    })
+
+
 };
