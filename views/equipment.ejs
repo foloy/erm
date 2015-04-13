@@ -18,12 +18,70 @@
                                     <h4 class="modal-title" id="myModalLabel">新增设备</h4>
                                 </div>
                                 <div class="modal-body">
-                                    ...
+                                    <form style="background-color: #ffffff" method="post" action="/equipAdd">
+                                        <div class="row form-group">
+                                            <div class="col-sm-6">
+                                                <label class="col-sm-3 control-label">编号</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control input-sm" name="code" placeholder="必填" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label class="col-sm-3 control-label">使用人</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control input-sm" name="user" placeholder="必填" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sm-6">
+                                                <label class="col-sm-3 control-label">名称</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control input-sm" name="name" placeholder="必填" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label class="col-sm-3 control-label">型号</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control input-sm" name="model" placeholder="必填" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sm-6">
+                                                <label class="col-sm-3 control-label">生产厂商</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control input-sm" name="manufacture" placeholder="必填" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label class="col-sm-3 control-label">始用日期</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control input-sm" name="startDate" placeholder="必填" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sm-6">
+                                                <label class="col-sm-3 control-label">使用年限</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control input-sm" name="validity" placeholder="必填" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label class="col-sm-3 control-label">使用部门</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control input-sm" name="dept" placeholder="必填" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-sm">保存</button>
+                                    </form>
                                 </div>
-                                <div class="modal-footer">
+                                <!--<div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                                     <button type="button" class="btn btn-sm">保存</button>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
                     </div>
@@ -42,7 +100,35 @@
             <div class="row">
                 <div class="col-sm-12">
                     <table class="table table-bordered">
-                        ...
+                        <thead>
+                        <th style="text-align: center">编号</th>
+                        <th style="text-align: center">设备名</th>
+                        <th style="text-align: center">设备编号</th>
+                        <th style="text-align: center">使用部门</th>
+                        <th style="text-align: center">使用人</th>
+                        <th style="text-align: center">生产厂家</th>
+                        <th style="text-align: center">型号</th>
+                        <th style="text-align: center">始用日期</th>
+                        <th style="text-align: center">使用年限</th>
+                        <th style="text-align: center">操作</th>
+                        </thead>
+                        <tr>
+                            <% equipments.forEach(function(equipment, index){ %>
+                            <td style="text-align: center"><%= index+1%></td>
+                            <td style="text-align: center"><a href="#"><%= equipment.name %></a></td>
+                            <td style="text-align: center"><%= equipment.code %></td>
+                            <td style="text-align: center"><%= equipment.dept %></td>
+                            <td style="text-align: center"><%= equipment.user %></td>
+                            <td style="text-align: center"><%= equipment.manufacture %></td>
+                            <td style="text-align: center"><%= equipment.model %></td>
+                            <td style="text-align: center"><%= equipment.startDate %></td>
+                            <td style="text-align: center"><%= equipment.validity %></td>
+                            <td style="text-align: center">
+                                <a href="" tooltip="授权"><i class="fa fa-lock"></i></a>
+                                <a href="" tooltip="重置密码"><i class="fa fa-reply"></i></a>
+                                <a href="/user/delete?code=<%=equipment.code%>" tooltip="删除"><i class="fa fa-trash-o"></i></a></td>
+                        </tr>
+                        <% }) %>
                     </table>
                 </div>
             </div>

@@ -4,6 +4,59 @@
         <div class="col-sm-1"></div>
         <div class="col-sm-10">
             <legend>个人信息管理</legend>
+            <form style="background-color: #ffffff" method="post" action="/">
+                <div class="row form-group">
+                    <div class="col-sm-6">
+                        <label class="col-sm-3 control-label">编号</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control input-sm" name="code" placeholder="必填" value="<%= user.code %>" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-sm-6">
+                        <label class="col-sm-3 control-label">姓名</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control input-sm" name="name" placeholder="必填" value="<%= user.name %>" required>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="col-sm-3 control-label">部门</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control input-sm" name="dept" placeholder="必填" value="<%= user.dept %>" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-sm-6">
+                        <label class="col-sm-3 control-label">性别</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control input-sm" name="gender" placeholder="必填" value="<%= user.gender %>" required>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="col-sm-3 control-label">职务</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control input-sm" name="position" placeholder="必填" value="<%= user.position %>" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-sm-6">
+                        <label class="col-sm-3 control-label">工种</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control input-sm" name="kind" placeholder="必填" value="<%= user.kind %>" required>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="col-sm-3 control-label">权限值</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control input-sm" name="right" placeholder="必填" value="<%= user.right %>" required>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-sm">保存</button>
+            </form>
         </div>
     </div>
 </div>

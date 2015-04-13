@@ -3,6 +3,7 @@
  */
 var crypto = require('crypto'),
     User =require('../models/user.js');
+    Equipment =require('../models/equipment.js');
 
 module.exports=function(app){
 
@@ -13,6 +14,7 @@ module.exports=function(app){
         });
     });
 
+    //用户模块
     app.get('/register', function (req, res) {
         res.render('register')
     });
@@ -22,7 +24,6 @@ module.exports=function(app){
         res.render('login');
     });
 
-    //app.post('/login',checkNotLogin);
     app.post('/login', function (req, res) {
         var md5=crypto.createHash('md5'),
             password = md5.update(req.body.password).digest('hex');
@@ -113,13 +114,6 @@ module.exports=function(app){
         next();
     }
 
-    app.get('/equipment',checkLogin);
-    app.get('/equipment',function(req,res){
-        res.render('equipment',{
-            user:req.session.user
-        });
-    });
-
     app.get('/user',checkLogin);
     app.get('/user',checkRight);
     app.get('/user',function(req,res){
@@ -147,4 +141,49 @@ module.exports=function(app){
             res.redirect('/user');
         })
     })
+
+
+    //基础设备模块
+    app.get('/equipment',checkLogin);
+    app.get('/equipment',function(req,res){
+        Equipment.list(req.body.name,function(err,equipments){
+            if(err){
+                equipments=[];
+            }
+            res.render('equipment',{
+                user:req.session.user,
+                equipments:equipments
+            });
+        })
+    });
+
+    app.post('/equipAdd',function(req,res){
+        var code = req.body.code,
+            name =req.body.name,
+            model =req.body.model,
+            manufacture =req.body.manufacture,
+            startDate =req.body.startDate,
+            validity =req.body.validity,
+            dept=req.body.dept,
+            user=req.body.user;
+
+        var newEquipment = new Equipment({
+            code : req.body.code,
+            name :req.body.name,
+            model :req.body.model,
+            manufacture :req.body.manufacture,
+            startDate :req.body.startDate,
+            validity :req.body.validity,
+            dept:req.body.dept,
+            user:req.body.user
+        });
+        //增加用户
+        newEquipment.save(function(err,equipment){
+            //req.session.user =user;
+            req.flash('success');
+            res.redirect('/equipment');
+        });
+    });
+
+
 };
