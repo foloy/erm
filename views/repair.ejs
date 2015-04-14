@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-sm-1"></div>
         <div class="col-sm-10">
-            <legend>故障管理</legend>
+            <legend>维修管理</legend>
             <div class="row">
                 <div class="col-md-9">
                     <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#myModal">
@@ -15,10 +15,10 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">新增故障信息</h4>
+                                    <h4 class="modal-title" id="myModalLabel">新增维修信息</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <form style="background-color: #ffffff" method="post" action="/hitchAdd">
+                                    <form style="background-color: #ffffff" method="post" action="/repairAdd">
                                         <div class="row form-group">
                                             <div class="col-sm-6">
                                                 <label class="col-sm-3 control-label">编号</label>
@@ -27,21 +27,21 @@
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
-                                                <label class="col-sm-3 control-label">标题</label>
+                                                <label class="col-sm-3 control-label">故障编号</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" class="form-control input-sm" name="name" placeholder="必填" required>
+                                                    <input type="text" class="form-control input-sm" name="hitchCode" placeholder="必填" required>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col-sm-6">
-                                                <label class="col-sm-3 control-label">故障保修人</label>
+                                                <label class="col-sm-3 control-label">维修人</label>
                                                 <div class="col-sm-9">
                                                     <input type="text" class="form-control input-sm" name="user" placeholder="必填" required>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
-                                                <label class="col-sm-3 control-label">保修时间</label>
+                                                <label class="col-sm-3 control-label">维修时间</label>
                                                 <div class="col-sm-9">
                                                     <input type="text" class="form-control input-sm" name="time" placeholder="必填"required>
                                                 </div>
@@ -49,7 +49,15 @@
                                         </div>
                                         <div class="row form-group">
                                             <div class="col-sm-6">
-                                                <label class="col-sm-3 control-label">故障描述</label>
+                                                <label class="col-sm-3 control-label">维修结果</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control input-sm" name="result" placeholder="必填" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sm-6">
+                                                <label class="col-sm-3 control-label">维修描述</label>
                                                 <div class="col-sm-9">
                                                     <textarea rows="3" cols="50" class="form-control input-sm" name="desc"
                                                               placeholder="必填" required></textarea>
@@ -69,7 +77,7 @@
                 </div>
                 <div class="col-sm-3">
                     <div class="input-group">
-                        <input type="text" class="form-control input-sm" name="queryText" placeholder="请输入故障名称"/>
+                        <input type="text" class="form-control input-sm" name="queryText" placeholder="请输入故障编号"/>
                         <span class="input-group-btn">
                             <button class="btn btn-sm" type="button" data-target="/user">
                                 <span class="fa fa-search" tooltip="查询"></span>
@@ -83,21 +91,23 @@
                     <table class="table table-bordered">
                         <thead>
                         <th style="text-align: center">编号</th>
-                        <th style="text-align: center">故障名称</th>
+                        <th style="text-align: center">维修编号</th>
                         <th style="text-align: center">故障编号</th>
-                        <th style="text-align: center">保修人</th>
-                        <th style="text-align: center">保修时间</th>
-                        <th style="text-align: center">故障描述</th>
+                        <th style="text-align: center">维修人</th>
+                        <th style="text-align: center">维修时间</th>
+                        <th style="text-align: center">维修结果</th>
+                        <th style="text-align: center">维修描述</th>
                         <th style="text-align: center">操作</th>
                         </thead>
                         <tr>
-                            <% hitches.forEach(function(hitch, index){ %>
+                            <% repairs.forEach(function(repair, index){ %>
                             <td style="text-align: center"><%= index+1%></td>
-                            <td style="text-align: center"><a href="#"><%= hitch.name %></a></td>
-                            <td style="text-align: center"><%= hitch.code %></td>
-                            <td style="text-align: center"><%= hitch.user %></td>
-                            <td style="text-align: center"><%= hitch.time %></td>
-                            <td style="text-align: center"><%= hitch.desc %></td>
+                            <td style="text-align: center"><a href="#"><%= repair.code %></a></td>
+                            <td style="text-align: center"><%= repair.hitchCode %></td>
+                            <td style="text-align: center"><%= repair.user %></td>
+                            <td style="text-align: center"><%= repair.time %></td>
+                            <td style="text-align: center"><%= repair.result %></td>
+                            <td style="text-align: center"><%= repair.desc %></td>
                             <td style="text-align: center">
                                 <a href="" tooltip="授权"><i class="fa fa-lock"></i></a>
                                 <a href="" tooltip="重置密码"><i class="fa fa-reply"></i></a>

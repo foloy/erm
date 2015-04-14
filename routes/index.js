@@ -4,6 +4,8 @@
 var crypto = require('crypto'),
     User =require('../models/user.js');
     Equipment =require('../models/equipment.js');
+    Hitch =require('../models/hitch.js');
+    Repair =require('../models/repair.js')
 
 module.exports=function(app){
 
@@ -177,7 +179,7 @@ module.exports=function(app){
             dept:req.body.dept,
             user:req.body.user
         });
-        //增加用户
+        //增加设备
         newEquipment.save(function(err,equipment){
             //req.session.user =user;
             req.flash('success');
@@ -190,10 +192,76 @@ module.exports=function(app){
     //设备故障模块
     app.get('/hitch',checkLogin);
     app.get('/hitch',function(req,res){
-        res.render('hitch',{
-            user:req.session.user
+        Hitch.list(req.body.name,function(err,hitches){
+            if(err){
+                hitches=[];
+            }
+            res.render('hitch',{
+                user:req.session.user,
+                hitches:hitches
+            });
         });
-    })
+    });
+
+    app.post('/hitchAdd',function(req,res){
+        var code =req.body.code,
+            name =req.body.name,
+            user =req.body.user,
+            time =req.body.time,
+            desc =req.body.desc;
+
+        var newHitch=new Hitch({
+            code:req.body.code,
+            name:req.body.name,
+            user:req.body.user,
+            time:req.body.time,
+            desc:req.body.desc
+        });
+        //增加故障设备
+        newHitch.save(function(err,hitch){
+            req.flash('success');
+            res.redirect('/hitch');
+        });
+    });
+
+
+
+    //设备维修模块
+    app.get('/repair',checkLogin);
+    app.get('/repair',function(req,res){
+        Repair.list(req.body.name,function(err,repairs){
+            if(err){
+                repairs=[];
+            }
+            res.render('repair',{
+                user:req.session.user,
+                repairs:repairs
+            });
+        });
+    });
+
+    app.post('/repairAdd',function(req,res){
+        var code =req.body.code,
+            hitchCode =req.body.hitchCode,
+            user =req.body.user,
+            time =req.body.time,
+            result =req.body.result,
+            desc =req.body.desc;
+
+        var newRepair=new Repair({
+            code:req.body.code,
+            hitchCode:req.body.hitchCode,
+            user:req.body.user,
+            time:req.body.time,
+            result:req.body.result,
+            desc:req.body.desc
+        });
+        //增加故障设备
+        newRepair.save(function(err,repair){
+            req.flash('success');
+            res.redirect('/repair');
+        });
+    });
 
 
 };
