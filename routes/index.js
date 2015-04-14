@@ -5,7 +5,8 @@ var crypto = require('crypto'),
     User =require('../models/user.js');
     Equipment =require('../models/equipment.js');
     Hitch =require('../models/hitch.js');
-    Repair =require('../models/repair.js')
+    Repair =require('../models/repair.js');
+    Transfer =require('../models/transfer');
 
 module.exports=function(app){
 
@@ -260,6 +261,43 @@ module.exports=function(app){
         newRepair.save(function(err,repair){
             req.flash('success');
             res.redirect('/repair');
+        });
+    });
+
+
+
+    //设备调拨模块
+    app.get('/transfer',checkLogin);
+    app.get('/transfer',function(req,res){
+        Transfer.list(req.body.code,function(err,transfers){
+            if(err){
+                transfers=[];
+            }
+            res.render('transfer',{
+                user:req.session.user,
+                transfers:transfers
+            });
+        });
+    });
+
+    app.post('/transferAdd',function(req,res){
+        var code =req.body.code,
+            fromDept =req.body.fromDept,
+            toDept =req.body.toDept,
+            user =req.body.user,
+            time =req.body.time;
+
+        var newTransfer=new Transfer({
+            code:req.body.code,
+            fromDept:req.body.fromDept,
+            toDept:req.body.toDept,
+            user:req.body.user,
+            time:req.body.time
+        });
+        //增加故障设备
+        newTransfer.save(function(err,transfer){
+            req.flash('success');
+            res.redirect('/transfer');
         });
     });
 
